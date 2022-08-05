@@ -109,17 +109,35 @@ app.listen(port, () => {
         // console.log(req.body)
 
 
-       
+
 
 
         client.db("database0").collection("post").updateOne({ _id: ObjectId(req.body._id) }, { $push: { likers: req.body.uid } })
-        .then((r) => console.log("sucess"))
+            .then((r) => console.log("sucess"))
 
     })
 
 
 
 
+
+    app.post("/delete", (req, res) => {
+
+        client.connect(err => {
+
+
+
+
+            client.db("database0").collection("post").deleteOne({ _id: ObjectId(req.body.id) })
+                .then((ans) => console.log("Deleted succesfully"))
+                .catch((err) => console.log(err))
+
+
+
+        })
+
+
+    })
 
 
 
