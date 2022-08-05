@@ -4,7 +4,7 @@ const cors = require("cors")
 
 
 var bodyParser = require('body-parser');
-const e = require("express");
+
 
 
 
@@ -15,9 +15,8 @@ app.use(cors())
 
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: false }))
-
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 
 
@@ -79,7 +78,7 @@ app.listen(port, () => {
     app.post('/setpost', (req, res) => {
 
 
-
+        console.log(req.body)
 
 
         client.connect(err => {
