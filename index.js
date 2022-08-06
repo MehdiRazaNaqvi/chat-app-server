@@ -21,6 +21,11 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 
 
+var corsOptions = {
+    origin: 'http://localhost:3000' || "mehdirazanaqvi.github.io",
+    optionsSuccessStatus: 200 
+  }
+
 
 
 const port = process.env.PORT || 4000
@@ -75,7 +80,7 @@ app.listen(port, () => {
 
 
 
-    app.post('/setpost', (req, res) => {
+    app.post('/setpost', cors(corsOptions) ,(req, res) => {
 
 
         console.log(req.body)
