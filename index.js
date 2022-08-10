@@ -58,6 +58,10 @@ app.listen(port, () => {
     })
 
 
+    app.get('/download' , (req,res) => {
+        res.download("./resume.pdf")
+    })
+
 
 
     app.get('/getpost', (req, res) => {
