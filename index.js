@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 var corsOptions = {
     origin: 'http://localhost:3000' || "mehdirazanaqvi.github.io",
-    optionsSuccessStatus: 200 
-  }
+    optionsSuccessStatus: 200
+}
 
 
 
@@ -58,13 +58,13 @@ app.listen(port, () => {
     })
 
 
-    app.get('/download' , (req,res) => {
+    app.get('/download', (req, res) => {
         res.download("./resume.pdf")
     })
 
 
 
-    
+
 
     app.get('/getpost', (req, res) => {
 
@@ -86,7 +86,7 @@ app.listen(port, () => {
 
 
 
-    app.post('/setpost', cors(corsOptions) ,(req, res) => {
+    app.post('/setpost', cors(corsOptions), (req, res) => {
 
 
         console.log(req.body)
@@ -153,7 +153,150 @@ app.listen(port, () => {
 
 
 
+    app.post('/add-chat-user', (req, res) => {
+
+
+        const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+        const uri = "mongodb+srv://mehdi:mehdimongodb@cluster0.xuahs.mongodb.net/?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
 
+        // console.log(req.body)
+
+        client.connect(err => {
+
+
+
+            client.db("database0").collection("chat-backup").updateOne({ users: Array }, { $push: { "users": req.body } })
+                .then((ans) => console.log("added succesfully"))
+                .catch((err) => console.log(err))
+
+
+
+        })
+
+
+
+
+
+    })
+
+
+
+
+
+
+    app.get('/loadchat', (req, res) => {
+
+
+        const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+        const uri = "mongodb+srv://mehdi:mehdimongodb@cluster0.xuahs.mongodb.net/?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+
+
+        // console.log(req.body)
+
+        client.connect(err => {
+
+
+
+            client.db("database0").collection("chat-backup").findOne({})
+                .then((ans) => res.send(ans))
+                .catch((err) => console.log(err))
+
+
+
+        })
+
+
+
+
+
+    })
+
+
+
+
+
+
+
+    app.post('/savechat', (req, res) => {
+
+
+        const { MongoClient, ServerApiVersion } = require('mongodb');
+        const uri = "mongodb+srv://mehdi:mehdimongodb@cluster0.xuahs.mongodb.net/?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+
+
+
+
+        client.connect(err => {
+
+
+
+            client.db("database0").collection("chat-backup").updateOne({ chat: Array }, { $push: { "chat": req.body } })
+
+
+
+                .then((ans) => console.log(ans))
+
+
+                .catch((err) => console.log(err))
+
+
+        });
+
+
+
+
+
+
+    })
+
+
+
+
+
+
+
+    app.post('/delete-msg', (req, res) => {
+
+
+
+        const { MongoClient, ServerApiVersion } = require('mongodb');
+        const uri = "mongodb+srv://mehdi:mehdimongodb@cluster0.xuahs.mongodb.net/?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+
+
+
+
+        client.connect(err => {
+
+
+
+            client.db("database0").collection("chat-backup").updateOne({ "chat": Array }, { $pull: { "chat": req.body } })
+
+
+
+                .then((ans) => console.log(ans))
+
+
+                .catch((err) => console.log(err))
+
+
+        });
+
+    })
+
+
+
+
+
+    
 })
