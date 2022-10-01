@@ -58,6 +58,7 @@ app.listen(port, () => {
     })
 
 
+
     app.get('/download', (req, res) => {
         res.download("./resume.pdf")
     })
@@ -108,6 +109,7 @@ app.listen(port, () => {
 
 
     })
+
 
 
 
@@ -298,5 +300,6 @@ app.listen(port, () => {
 
 
 
-    
+
+
 })
