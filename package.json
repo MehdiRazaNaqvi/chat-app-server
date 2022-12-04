@@ -1,7 +1,6 @@
 {
   "name": "chat_app_server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.20.0",
@@ -17,5 +16,14 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MehdiRazaNaqvi/chat-app-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MehdiRazaNaqvi/chat-app-server/issues"
+  },
+  "homepage": "https://github.com/MehdiRazaNaqvi/chat-app-server#readme",
+  "description": ""
 }
