@@ -50,7 +50,7 @@ app.listen(port, () => {
 
 
     app.get('/', (req, res) => {
-        res.send("Running")
+        res.send("running")
 
 
 
